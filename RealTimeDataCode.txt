@@ -21,7 +21,8 @@ void printToLog(vector<string>& v) {
 	// opens file
 	file.open(fileName);
 	// writes vector to file
-	for (int i = 0; i < v.size(); ++i) {
+	int size = v.size();
+	for (int i = 0; i < size; ++i) {
 		file << v[i] << endl;
 	}
 	// closes file
