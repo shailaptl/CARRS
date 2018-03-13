@@ -11,22 +11,6 @@ function initMap() {
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
-
-function initDemoMap() {
-	var demoMap = new google.maps.Map(document.getElementById('demomap'), {
-	  zoom: 13,
-	  center: {lat: 40.7830603, lng: -73.97124880000001}
-	});
-	
-	var marker = new google.maps.Marker({
-		map: map,
-		position: {lat: 40.7830603, lng: -73.97124880000001}
-	});
-	
-	var ManhattanTraffic = new google.maps.TrafficLayer();
-	ManhattanTraffic.setMap(demoMap);
-}
-
 function setMap(latitude, longitude) {	
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
