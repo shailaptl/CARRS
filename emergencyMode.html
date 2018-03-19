@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<base target="_top">
+		<title>C.A.R.R.S. Emergency Vehicle Override</title>
+	</head>
+	<body>
+		<h3><a href="Google_map.html">Map</a><br/><a href="logout.html">Logout</a></h3>		
+		<h1>C.A.R.R.S. Emergency Vehicle Override</h1>
+		
+		<form action="starting_post.php" method="post">
+		<p><b>Starting Location</b></p>
+		<select id="starting" name="starting" onchange="this.form.submit()">                      
+			<option selected="selected" value="Select_Starting">--Select Starting Location--</option>
+			<option value="3">UF Fick Gardens</option> 
+			<option value="2" >UF Museum Road Light</option>
+			<option value="1">UF Gale Lemerand Light</option>
+			<option value="0">UF Phelps Lab</option>
+		</select>
+		</form>
+		
+		
+		<form action="starting_post.php" method="post">
+		<p><b>Ending Location</b></p>
+		<select id="ending" name="ending" onchange="this.form.submit()">                      
+			<option selected="selected" value="Select_Ending">--Select Ending Location--</option>
+			<option value="3">UF Fick Gardens</option> 
+			<option value="2" >UF Museum Road Light</option>
+			<option value="1">UF Gale Lemerand Light</option>
+			<option value="0">UF Phelps Lab</option>
+		</select>
+		</form>
+		
+		<!--this is because of Firefox and autocomplete, which is autocompletely lame-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$( 'option[value="Select_Starting"]' ).prop( 'selected', 'selected' );
+		</script>
+		
+		<!--this is because of Firefox and autocomplete, which is autocompletely lame-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$( 'option[value="Select_Ending"]' ).prop( 'selected', 'selected' );
+		</script>
+		
+		
+		<script>
+			function startFunction() {
+				var location1 = document.getElementById("starting");
+				var val = document.getElementById("starting").value;
+
+				if (val === "1") {
+					alert("You chose Gale");
+				}
+			}
+		</script>
+		
+		<script>
+			function endFunction() {
+				var location1 = document.getElementById("ending");
+				var val = document.getElementById("ending").value;
+				if (val === "2") {
+					alert("You chose Museum");
+				}
+			}
+		</script>
+
+		
+		 
+	</body>
+</html>
