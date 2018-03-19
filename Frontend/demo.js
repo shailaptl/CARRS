@@ -5,12 +5,18 @@ $(function () {
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
-	  center: {lat: 29.6516344, lng: -82.32482619999996}
+	  center: {lat: 40.7830603, lng: -73.97124880000001}
+	});
+	
+	var marker = new google.maps.Marker({
+		map: map,
+		position: {lat: 40.7830603, lng: -73.97124880000001}
 	});
 	
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
+
 function setMap(latitude, longitude) {	
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
