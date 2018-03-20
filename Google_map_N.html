@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#map {
+				width: 100%;
+				height: 400px;
+				background-color: grey;
+			}
+		</style>
+	</head>
+	<body>
+		<h3><a href="Emergencyoverride.html">Emergency Override</a><br/><a href="logout.html">Logout</a></h3>
+		<h1>C.A.R.R.S. Map</h1>
+		<div id="map"></div>
+		<script type="text/javascript">			
+			
+			function mapFunction() {
+				// these are the red and green icons we'll use to change depending on the signal
+				var redIcon = 'red_Marker.png';
+				var greenIcon = 'green_Marker.png';
+				
+				// we start centered at the University
+				var ufUniversity = {lat: 29.643632, lng: -82.354930};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 16,
+					center: ufUniversity,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				
+				// this creates an array of markers so that we can add the locations for the route where there will be traffic lights - 'TL' = turning lane, 'ST' = straight
+				var locations = [
+					['ufFickGardensST', 29.6412, -82.364178, 8],
+					['ufFickGardensTL', 29.6412, -82.36459, 7],
+					['ufMuseumRoadLightST', 29.642304, -82.364136, 6],
+					['ufMuseumRoadLightTL', 29.642304, -82.36459, 5],
+					['ufGaleLemerandLightST', 29.644896, -82.350424, 4],
+					['ufGaleLemerandLightTL', 29.6453, -82.350424, 3],
+					['ufPhelpsLabST', 29.644896, -82.348729, 2],
+					['ufPhelpsLabTL', 29.6453, -82.348729, 1]
+
+				];
+				var infowindow = new google.maps.InfoWindow();
+				
+				// these are the locations in the array
+				var locationId = 0;
+				var locationId1 = 2;
+				var locationId2 = 4;
+				var locationId3 = 6;
+				
+				// function to update the markers with red or green pins
+				function updateMarkerFunction(spot1, spot2) {
+					marker2 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[spot1][1], locations[spot1][2]),
+						map: map,
+						icon: greenIcon
+					});
+					marker3 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[spot2][1], locations[spot2][2]),
+						map: map,
+						icon: redIcon
+					});
+					
+					// this lets a user click on a marker and see the location of the marker
+					google.maps.event.addListener(marker2, 'click', (function(marker2, spot1) {
+						return function() {
+							infowindow.setContent(locations[spot1][0]);
+							infowindow.open(map, marker2);
+						}
+					})(marker2, spot1));
+
+					google.maps.event.addListener(marker3, 'click', (function(marker3, spot2) {
+						return function() {
+							infowindow.setContent(locations[spot2][0]);
+							infowindow.open(map, marker3);
+						}
+					})(marker3, spot2));
+				
+				}
+				
+				// this is how you get the real current time
+//				var currentTime = new Date().toTimeString().split(" ")[0];
+				
+				// fake example current time variable for demo use
+//				var currentTime = "00:00:17";
+				
+				
+				var occResponse;
+				
+				function reqestListener() {
+				  console.log(this.responseText);
+				}
+
+				var occRequest = new XMLHttpRequest();
+				occRequest.onload = function() {
+					occResponse = this.responseText;
+					if (occResponse == 1) {	
+						updateMarkerFunction(locationId, locationId+1);
+					} else if (occResponse == 0) {
+						updateMarkerFunction(locationId+1, locationId);
+					}
+
+				};
+				occRequest.open("get", "occ_or_vacc_db.php?o=", true);
+				occRequest.send();
+											
+				
+				
+				// this calls the updateMarker function based on condition
+//				if (locationId === 0) {	
+//					updateMarkerFunction(locationId, locationId+1);
+//				}
+				// this calls the updateMarker function based on condition
+				// notice that the parameters are reversed--else 
+				if (locationId1 === 2) {	
+					updateMarkerFunction(locationId1, locationId1+1);
+				}
+				if (locationId2 === 4) {	
+					updateMarkerFunction(locationId2, locationId2+1);
+				}
+				if (locationId3 === 6) {	
+					updateMarkerFunction(locationId3, locationId3+1);
+				}				
+												
+			}								
+		</script>
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQM-EPaDHG82XQL2BmTYhluBtl-nDVOsA
+&callback=mapFunction">
+		</script>
+	</body>
+</html>
