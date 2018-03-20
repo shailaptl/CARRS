@@ -2,10 +2,6 @@ $(function () {
 	$(".NavigationBar").load("header.html");
 });
 
-$(document).ready(function() {
-    $('dropdown-toggle').dropdown()
-});
-
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
@@ -28,8 +24,8 @@ function setMap(latitude, longitude) {
 
 function getAddress(){
 	//printing it
-	var address = document.getElementById('inputAddress');
 	var print = document.getElementById('printHere');
+	var address = document.getElementById('inputAddress');
 	print.innerHTML = address.textContent + "<br/>";
 	
 	//setting the map

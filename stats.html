@@ -30,12 +30,13 @@
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#">today</a></li>
-				<li><a href="#">this week</a></li>
-				<li><a href="#">this month</a></li>
-				<li><a href="#">this year</a></li>
+				<li><a href="#" onclick="statsToday();">today</a></li>
+				<li><a href="#" onclick="statsWeek();">this week</a></li>
+				<li><a href="#" onclick="statsMonth();">this month</a></li>
+				<li><a href="#" onclick="statsYear();">this year</a></li>
 			</ul>
 		</div>
+		<p id = "printHere">Test.</p>
 		Average green light duration: <br>
 		Average time saved per driver: <br>
 	</div>
@@ -45,6 +46,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="main.js"></script>
+	<script src="stats.js"></script>
   </body>
 </html>
