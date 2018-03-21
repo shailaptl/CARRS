@@ -2,10 +2,28 @@ $(function () {
 	$(".NavigationBar").load("header.html");
 });
 
+function getTimeandDate() {
+	getTime();
+	getDate();
+}
+
+function getTime() {
+	var d = new Date();
+	var print = document.getElementById('time');
+	print.innerHTML = "Time: " + d.toTimeString();
+	setTimeout("getTime()", 1000);
+}
+
+function getDate() {
+	var d = new Date();
+	var print = document.getElementById('date');
+	print.innerHTML = "Date: " + d.toLocaleDateString();
+}
+
 function statsToday() {
 	//printing it
 	var print = document.getElementById('timeValue');
-	print.innerHTML = "today:" ;
+	print.innerHTML = "today:";
 	
 	//change result value
 	printValueCarsPassed(5);
