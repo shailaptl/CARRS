@@ -25,6 +25,8 @@ function statsToday() {
 	var print = document.getElementById('timeValue');
 	print.innerHTML = "today:";
 	
+	//select count from table where count = 1;
+	
 	//change result value
 	printValueCarsPassed(5);
 }

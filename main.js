@@ -2,6 +2,26 @@ $(function () {
 	$(".NavigationBar").load("header.html");
 });
 
+
+function initDirMap() {
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+
+	var map = new google.maps.Map(document.getElementById('dirMap'), {
+		zoom:7,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+
+	directionsDisplay.setMap(map);
+	directionsDisplay.setPanel(document.getElementById('panel'));
+
+	var request = {
+		origin: 'Dublin',
+		destination: '53.4198282,-6.2183937',
+		travelMode: google.maps.DirectionsTravelMode.DRIVING
+	};
+}
+
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
