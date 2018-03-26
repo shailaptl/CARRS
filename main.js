@@ -13,6 +13,8 @@ function initMap() {
 }
 
 function setMap(latitude, longitude) {	
+	console.log(latitude);
+	console.log(longitude);
 	var map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
 	  center: {lat: latitude, lng: longitude}
@@ -35,12 +37,12 @@ function getAddress(){
         geocoding.geocode({'address': address}, function(results, status)
 		{
 		console.log(status);
-          if (status === 'OK') {
-			  console.log(results[0].geometry.location.lat());
-			  console.log(results[0].geometry.location.lng());
+			if (status === 'OK') {
+				console.log(results[0].geometry.location.lat());
+				console.log(results[0].geometry.location.lng());
 				setMap(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
+			} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			}
 	});
 }

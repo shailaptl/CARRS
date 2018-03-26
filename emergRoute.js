@@ -28,60 +28,20 @@ function initMap() {
 	directionsDisplay.setMap(map);
 }
 
-var destLat;
-	var destLng;
-function getAddress(){	
-	//setting the origin
-	origin = document.getElementById('origin').value;
-	var geocoding = new google.maps.Geocoder();
-	
-	var originLat;
-	var originLng;
-        geocoding.geocode({'address': origin}, function(results, status)
-		{
-          if (status === 'OK') {
-				originLat = results[0].geometry.location.lat();
-				originLng = results[0].geometry.location.lng();
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-	});
-	
-	//setting the destination
-	dest = document.getElementById('dest').value;
-	var geocoding = new google.maps.Geocoder();
-	
-        geocoding.geocode({'address': dest}, function(results, status)
-		{
-          if (status === 'OK') {
-				destLat = results[0].geometry.location.lat();
-				destLng = results[0].geometry.location.lng();
-				console.log(destLat);
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-	});
-	console.log(originLat);
-	console.log(destLat);
-	setMap(originLat, originLng, destLat, destLng);
-}
-
-function setMap(ilat, ilng, dlat, dlng) {	
-	console.log(ilat);
-	console.log(dlat);
+function getAddress() {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();	//for map
-	
+	ori = document.getElementById('origin').value;
+	dest = document.getElementById('dest').value;
+
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom:13,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 	});
 	
-	var orig = String(ilat) + ',' + String(ilng);
-	var dest = String(dlat) + ',' + String(dlng);
-	
+	//directionsDisplay.setPanel(document.getElementById('panel'));
 	var request = {
-		origin: orig,
+		origin: ori,
 		destination: dest,
 		travelMode: google.maps.DirectionsTravelMode.DRIVING
 	};
