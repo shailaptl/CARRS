@@ -1,6 +1,6 @@
 <?php
 	// CREATE CONNECTION
-	$connection = mysqli_connect("localhost:3306", "root", "MtG1305camila!", "CEN3031_db");
+	$connection = mysqli_connect("localhost:3306", "root", "root", "CEN3031_db");
 
 	// TEST CONNECTION
 	if ($connection === false)
