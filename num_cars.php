@@ -1,6 +1,6 @@
 <?php
 	// CREATE CONNECTION
-	$connection = mysqli_connect("localhost:3306", "root", "root", "CEN3031_db");
+	$connection = mysqli_connect("localhost:3306", "root", "MtG1305camila!", "CEN3031_db");
 
 	// TEST CONNECTION
 	if ($connection === false)
@@ -10,7 +10,7 @@
 
 
 	// CREATE SQL QUERY
-	$day1 = "2_16_2018"; //EDIT TO SPECIFIC DAY
+	$day1 = "2_13_2018"; //EDIT TO SPECIFIC DAY
 	$day2 = "2_16_2018"; //EDIT TO SPECIFIC DAY
 
 	$sql1 = "SELECT SUM(occOrVac) AS SUM
@@ -31,15 +31,15 @@
 		$row2 = $result2->fetch_assoc();
 
 		echo ($row2['SUM'] - $row1['SUM'])."\n";
+
+		// FREE RESULT
+		mysqli_free_result($result1);
+		mysqli_free_result($result2);
 	} 
 	else 
 	{
-		echo "Failed - SQL Query. " . mysqli_error($connection) . "\n";
+		echo "Failed - SQL Query. " . mysqli_error($connection) . "\n"; 
 	}
-
-	// FREE RESULT
-	mysqli_free_result($result1);
-	mysqli_free_result($result2);
 
 	// CLOSE CONNECTION
 	mysqli_close($connection);
