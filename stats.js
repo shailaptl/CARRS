@@ -20,46 +20,51 @@ function getDate() {
 	print.innerHTML = "Date: " + d.toLocaleDateString();
 }
 
-function statsToday() {
-	//printing it
-	var print = document.getElementById('timeValue');
-	print.innerHTML = "today:";
-	
-	//select count from table where count = 1;
-	
-	//change result value
-	printValueCarsPassed(5);
-}
+/*function drawMultSeries()
+		{
+			google.charts.load('current', {packages: ['corechart', 'bar']});
+			google.charts.setOnLoadCallback(drawMultSeries);
+			
+			var totalResponse;
+			var total_T1;
+			var total_T1_Int = 0;
 
-function statsWeek() {
-	//printing it
-	var print = document.getElementById('timeValue');
-	print.innerHTML = "this week:";
-	
-	//change result value
-	printValueCarsPassed(10);
-}
+			var totalRequest = new XMLHttpRequest();
+			totalRequest.open("get", "number_of_cars.php?", true);
+			totalRequest.send();
+			
+			totalRequest.onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					totalResponse = this.responseText;
+					total_T1 = totalResponse;
+					total_T1_Int = parseInt(total_T1);
 
-function statsMonth() {
-	//printing it
-	var print = document.getElementById('timeValue');
-	print.innerHTML = "this month:";
-	
-	//change result value
-	printValueCarsPassed(15);
-}
+				var data = google.visualization.arrayToDataTable([
+					['Light', 'Today',{ role: 'style' }],
+					['T1 - Museum Rd/Reitz Union Dr', total_T1_Int, 'blue'],
+					['T2 - Museum Rd/Gale Lemerand', 20, 'color: #FF8000'],
+					['T3 - Museum Rd/Radio Rd', 110, 'blue'],
+					['T4 - Museum Rd/Memorial Rd', 112, 'color: #FF8000']
+				]);
 
-function statsYear() {
-	//printing it
-	var print = document.getElementById('timeValue');
-	print.innerHTML = "this year:";
-	
-	//change result value
-	printValueCarsPassed(20);
-}
+				var options = {
+					title: 'Traffic Light Statistics',
+					chartArea: {width: '50%'},
+					hAxis: {
+						title: 'Number of Cars At Light',
+						minValue: 0
+					},
+					vAxis: {
+						title: 'Traffic Lights'
+					}
+				};
 
-function printValueCarsPassed(numCars) {
-	//printing it
-	var print = document.getElementById('numCarsResult');
-	print.innerHTML = numCars + "<br/>";
-}
+				var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+				chart.draw(data, options);
+					}
+				};
+			
+		}
+		*/

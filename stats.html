@@ -1,52 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-		<!-- CSS -->
-		<link rel="stylesheet" href = "main.css">
-		
-		<!-- Bootstrap -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-	</head>
-  <body onload="getTimeandDate();">	
-	<div class= "NavigationBar">
-		<!-- NavBar is being called -->
-	</div>
-	<div class="col-md-1"> </div>
-	<div class="col-md-11">
-		<p id="date"></p>
-		<p id="time"></p>
-		<p id="city">City: Gainesville</p>
-		<p id="state">State: FL</p>
-		<p id="GPS">GPS Coordinates:</p>
-		
-		<div class="dropdown">
-		Number of Cars that Passed the Intersection
-			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				<p id = "timeValue">Time
-				<span class="caret"></span></p>
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="#" onclick="statsToday();">today</a></li>
-				<li><a href="#" onclick="statsWeek();">this week</a></li>
-				<li><a href="#" onclick="statsMonth();">this month</a></li>
-				<li><a href="#" onclick="statsYear();">this year</a></li>
-			</ul>
-			<span id = "numCarsResult">Test.</span>
-		</div>
-		<p id="avgGreenLight">Average green light duration: </p>
-		<p id="avgTime">Average time saved per driver: </p>
-	</div>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+			<!-- CSS -->
+			<link rel="stylesheet" href = "main.css">
+			
+			<!-- Bootstrap -->
+			<link href="css/bootstrap.min.css" rel="stylesheet">
+	</head>
+
+	<body onload = "getTimeandDate();">
+		<div class= "NavigationBar">
+			<!-- NavBar is being called -->
+		</div>
+		<div class="col-md-1"> </div>
+		<div class="col-md-11">
+			<p id="date"></p>
+			<p id="time"></p>
+			<p id="city">City: Gainesville</p>
+			<p id="state">State: FL</p>
+
+			<div id="chart_div"></div>
+			<div id="chart_div2"></div>
+		</div>
+
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+		<script>
+		google.charts.load('current', {packages: ['corechart', 'bar']});
+		google.charts.setOnLoadCallback(drawMultSeries);
+				
+		function drawMultSeries()
+		{
+			console.log(100);
+			
+			var count = 0;
+			var requests = [];
+			var scripts = ["number_of_cars.php?", "number_of_cars.php?", "number_of_cars.php?", "number_of_cars.php?"];
+			var total_car_counts_string = [scripts.length];
+			var total_car_counts = [scripts.length];
+
+
+			//This for loop sends all of the script requests.
+			for(i = 0; i < scripts.length; i++)
+			{
+				requests[i] = new XMLHttpRequest();
+				requests[i].open("get", scripts[i], true);
+				requests[i].send();
+			}
+			
+			// //This will assign the variables once the scripts have run
+			// function setVar(i)
+			// {
+			// 	console.log(900);
+			// 	if (requests[i].readyState == 4 && requests[i].status == 200)
+			// 	{
+			// 		count++;
+			// 		total_car_counts_string[i] = this.responseText;
+			// 		total_car_counts[i] = parseInt(total_car_counts_string[i]);
+			// 	}
+			// }
+
+			// for(int i = 0; i < 4; i++) {
+			// 	requests[i].onreadystatechange = setVar(i);
+			// }
+
+			//This will assign the variables once the scripts have run
+			// for(int i = 0; i < 4; i++)
+			// {
+			// 	requests[i].onreadystatechange = function()
+			// 	{
+			// 		console.log(900);
+			// 		if (this.readyState == 4 && this.status == 200)
+			// 		{
+			// 			count++;
+			// 			total_car_counts_string[i] = this.responseText;
+			// 			total_car_counts[i] = parseInt(total_car_counts_string[i]);
+			// 		}
+			// 	};
+			// }
+
+			requests[0].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[0] = this.responseText;
+					total_car_counts[0] = parseInt(total_car_counts_string[0]);
+				}
+			};
+
+			requests[1].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[1] = this.responseText;
+					total_car_counts[1] = parseInt(total_car_counts_string[1]);
+				}
+			};
+
+			requests[2].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[2] = this.responseText;
+					total_car_counts[2] = parseInt(total_car_counts_string[2]);
+				}
+			};
+
+			requests[3].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					total_car_counts_string[3] = this.responseText;
+					total_car_counts[3] = parseInt(total_car_counts_string[3]);
+					count++;
+					chart();
+				}
+			};
+			
+			var chart = function()
+			{
+				if(count == 4)
+				{
+					var data = google.visualization.arrayToDataTable([
+						['Light', 'Number of Cars'],
+						['T1 - Museum Rd/Reitz Union Dr', total_car_counts[0]],
+						['T2 - Museum Rd/Gale Lemerand', total_car_counts[1]],
+						['T3 - Museum Rd/Radio Rd', total_car_counts[2]],
+						['T4 - Museum Rd/Memorial Rd', total_car_counts[3]]
+					]);
+
+					var options = {
+						title: 'Traffic Light Statistics',
+						chartArea: {width: '50%'},
+						hAxis: {
+							title: 'Number of Cars At Light',
+							minValue: 0
+						},
+						vAxis: {
+							title: 'Traffic Lights'
+						}
+					};
+
+					var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+					chart.draw(data, options);
+				}
+			}
+		}
+		</script>
+		<br/>
+
+	<script>
+		google.charts.load('current', {packages: ['corechart', 'bar']});
+		google.charts.setOnLoadCallback(drawMultSeries);
+
+		function drawMultSeries()
+		{
+			var count = 0;
+			var requests = [];
+			var scripts = ["number_of_cars.php?", "number_of_cars.php?", "number_of_cars.php?", "number_of_cars.php?"];
+			var total_car_counts_string = [scripts.length];
+			var total_car_counts = [scripts.length];
+
+
+			//This for loop sends all of the script requests.
+			for(i = 0; i < scripts.length; i++)
+			{
+				requests[i] = new XMLHttpRequest();
+				requests[i].open("get", scripts[i], true);
+				requests[i].send();
+			}
+
+			requests[0].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[0] = this.responseText;
+					total_car_counts[0] = parseInt(total_car_counts_string[0]);
+				}
+			};
+
+			requests[1].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[1] = this.responseText;
+					total_car_counts[1] = parseInt(total_car_counts_string[1]);
+				}
+			};
+
+			requests[2].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					count++;
+					total_car_counts_string[2] = this.responseText;
+					total_car_counts[2] = parseInt(total_car_counts_string[2]);
+				}
+			};
+
+			requests[3].onreadystatechange = function()
+			{
+				if (this.readyState == 4 && this.status == 200)
+				{
+					total_car_counts_string[3] = this.responseText;
+					total_car_counts[3] = parseInt(total_car_counts_string[3]);
+					count++;
+					chart();
+				}
+			};
+
+			var chart = function()
+			{
+				if(count == 4)
+				{
+					var data = google.visualization.arrayToDataTable([
+						['Light', 'Today', { role: 'style'}],
+						['T1 - Museum Rd/Reitz Union Dr', total_car_counts[0], 'color: #31B404'],
+						['T2 - Museum Rd/Gale Lemerand', total_car_counts[1], 'color: #31B404'],
+						['T3 - Museum Rd/Radio Rd', total_car_counts[2], 'color: #31B404'],
+						['T4 - Museum Rd/Memorial Rd', total_car_counts[3], 'color: #31B404']
+					]);
+						
+					var options = {
+						title: '',
+						chartArea: {width: '50%'},
+						hAxis: {
+							title: 'Average Green Light Duration (in seconds)',
+							minValue: 0
+						},
+						vAxis: {
+							title: 'Traffic Lights'
+						}
+					};
+					var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
+					chart.draw(data, options);
+				}
+			}
+		}
+	</script>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="stats.js"></script>
-  </body>
+	
+	</body>
 </html>
