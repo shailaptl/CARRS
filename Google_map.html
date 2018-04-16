@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			#map {
+				height: 400px;
+				background-color: grey;
+			}
+		</style>
+
+		<!-- CSS -->
+		<link rel="stylesheet" href = "main.css">
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="col-md-12">
+			<div class= "NavigationBar">
+				<!-- NavBar is being called -->
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-10" id="map"></div>
+		<script type="text/javascript">
+			function mapFunction() {
+				// these are the red and green icons we'll use to change depending on the signal
+				var redIcon = 'red_Marker.png';
+				var greenIcon = 'green_Marker.png';
+				// this is a neutral icon to use as a pre-command state
+				var brownIcon = 'neutral_Marker.png';
+				
+				// we start centered at the University
+				var ufUniversity = {lat: 29.643632, lng: -82.354930};
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 16,
+					center: ufUniversity,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				
+				// this creates an array of markers so that we can add the locations for the route where there will be traffic lights
+				var locations = [
+					['ufFickGardensGreen', 29.6412, -82.364178, 8],
+					['ufFickGardensRed', 29.6412, -82.36459, 7],
+					['ufMuseumRoadLightGreen', 29.642304, -82.364136, 6],
+					['ufMuseumRoadLightRed', 29.642304, -82.36459, 5],
+					['ufGaleLemerandLightGreen', 29.644896, -82.350424, 4],
+					['ufGaleLemerandLightREd', 29.6453, -82.350424, 3],
+					['ufPhelpsLabGreen', 29.644896, -82.348729, 2],
+					['ufPhelpsLabRed', 29.6453, -82.348729, 1]
+
+				];
+				var i;
+				var marker1;
+				var infowindow = new google.maps.InfoWindow();
+				
+				// this creates intial neutral markers for the locations beyond the starting location
+				for (i = 0; i < locations.length; i++) {  
+					marker1 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+						map: map,
+						icon: brownIcon
+					});
+					
+					// this lets a user click on a marker and see the location of the marker
+					google.maps.event.addListener(marker1, 'click', (function(marker1, i) {
+						return function() {
+							infowindow.setContent(locations[i][0]);
+							infowindow.open(map, marker1);
+						}
+					})(marker1, i));
+				}
+				
+				// these are the locations in the array
+				var locationId = 0;
+				var locationId1 = 2;
+				var locationId2 = 4;
+				var locationId3 = 6;
+				
+				if (locationId === 0) {	
+					// this creates a new updated marker
+					marker2 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[0][1], locations[0][2]),
+						map: map,
+						icon: greenIcon
+					});
+					marker3 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[1][1], locations[1][2]),
+						map: map,
+						icon: redIcon
+					});
+				}
+				if (locationId1 === 2) {	
+					// this creates a new updated marker
+					marker2 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[2][1], locations[2][2]),
+						map: map,
+						icon: greenIcon
+					});
+					marker3 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[3][1], locations[3][2]),
+						map: map,
+						icon: redIcon
+					});
+				}
+				if (locationId2 === 4)
+				{	
+					// this creates a new updated marker
+					marker2 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[4][1], locations[4][2]),
+						map: map,
+						icon: greenIcon
+					});
+					marker3 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[5][1], locations[5][2]),
+						map: map,
+						icon: redIcon
+					});
+				}
+				if (locationId3 === 6)
+				{	
+					// this creates a new updated marker
+					marker2 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[6][1], locations[6][2]),
+						map: map,
+						icon: greenIcon
+					});
+					marker3 = new google.maps.Marker({
+						position: new google.maps.LatLng(locations[7][1], locations[7][2]),
+						map: map,
+						icon: redIcon
+					});
+				}
+			}
+		</script>
+		<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQM-EPaDHG82XQL2BmTYhluBtl-nDVOsA&callback=mapFunction">
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>

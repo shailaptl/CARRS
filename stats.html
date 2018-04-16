@@ -130,14 +130,15 @@
 				if(count == 4)
 				{
 					var data = google.visualization.arrayToDataTable([
-						['Light', 'Number of Cars'],
-						['T1 - Museum Rd/Reitz Union Dr', total_car_counts[0]],
-						['T2 - Museum Rd/Gale Lemerand', total_car_counts[1]],
-						['T3 - Museum Rd/Radio Rd', total_car_counts[2]],
-						['T4 - Museum Rd/Memorial Rd', total_car_counts[3]]
+						['Light', 'Number of Cars', { role: 'style' }],
+						['T1 - Museum Rd/Reitz Union Dr', total_car_counts[0], 'blue'],
+						['T2 - Museum Rd/Gale Lemerand', total_car_counts[1], 'color: #FF8000'],
+						['T3 - Museum Rd/Radio Rd', total_car_counts[2], 'blue'],
+						['T4 - Museum Rd/Memorial Rd', total_car_counts[3], 'color: #FF8000']
 					]);
 
 					var options = {
+						legend: {position: 'none'},
 						title: 'Traffic Light Statistics',
 						chartArea: {width: '50%'},
 						hAxis: {
@@ -232,6 +233,7 @@
 					]);
 						
 					var options = {
+						legend: {position: 'none'},
 						title: '',
 						chartArea: {width: '50%'},
 						hAxis: {
