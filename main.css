@@ -1,12 +1,18 @@
 body{
 	background-color:#6C9AC3;
-	font-family: Helvetica;
+    font-family: Helvetica;
 }
 
 #map {
     /*height: 300px;
 	width: 300px;*/
 	height: 90%;
+}
+
+#car
+{
+    height: 10%;
+    width: 10%
 }
 
 html, body {
