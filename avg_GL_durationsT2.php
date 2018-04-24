@@ -84,9 +84,9 @@
 
 		$avg_GL_left_lane = $GL_durations_left_lane / $num_of_GL_durations_left_lane;
 
-		echo "Avg. Green Light Duration (left_lane):                 " . round($avg_GL_left_lane,4) . "\n";
-		echo "# Green Light Duration (left_lane):                    " . $num_of_GL_durations_left_lane . "\n";
-		echo "Accumulated (in sec) Green Light Duration (left_lane): " . $GL_durations_left_lane . "\n\n";
+		// echo "Avg. Green Light Duration (left_lane):                 " . round($avg_GL_left_lane,4) . "\n";
+		// echo "# Green Light Duration (left_lane):                    " . $num_of_GL_durations_left_lane . "\n";
+		// echo "Accumulated (in sec) Green Light Duration (left_lane): " . $GL_durations_left_lane . "\n\n";
 		echo round($avg_GL_left_lane,4); 
 
 	    // FREE RESULTs
