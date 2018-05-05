@@ -53,37 +53,6 @@
 				requests[i].send();
 			}
 			
-			// //This will assign the variables once the scripts have run
-			// function setVar(i)
-			// {
-			// 	console.log(900);
-			// 	if (requests[i].readyState == 4 && requests[i].status == 200)
-			// 	{
-			// 		count++;
-			// 		total_car_counts_string[i] = this.responseText;
-			// 		total_car_counts[i] = parseInt(total_car_counts_string[i]);
-			// 	}
-			// }
-
-			// for(int i = 0; i < 4; i++) {
-			// 	requests[i].onreadystatechange = setVar(i);
-			// }
-
-			//This will assign the variables once the scripts have run
-			// for(int i = 0; i < 4; i++)
-			// {
-			// 	requests[i].onreadystatechange = function()
-			// 	{
-			// 		console.log(900);
-			// 		if (this.readyState == 4 && this.status == 200)
-			// 		{
-			// 			count++;
-			// 			total_car_counts_string[i] = this.responseText;
-			// 			total_car_counts[i] = parseInt(total_car_counts_string[i]);
-			// 		}
-			// 	};
-			// }
-
 			requests[0].onreadystatechange = function()
 			{
 				if (this.readyState == 4 && this.status == 200)
@@ -152,6 +121,7 @@
 
 					var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
 					chart.draw(data, options);
+					drawMultSeries();
 				}
 			}
 		}
@@ -246,6 +216,7 @@
 					};
 					var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
 					chart.draw(data, options);
+					drawMultSeries();
 				}
 			}
 		}
